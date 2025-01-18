@@ -19,8 +19,8 @@ const TaskCard = ({
     dueDate,
     id,
     link,
-    onClickDeleteButton,
     priority,
+    setDialogOpen,
     title,
 }) => {
     const location = useLocation();
@@ -50,7 +50,10 @@ const TaskCard = ({
                 editRouteUrl={editTaskRouteUrl}
                 id={id}
                 routeUrl={tasksRouteUrl}
-                onClickDeleteButton={onClickDeleteButton}
+                onClickDeleteButton={() => setDialogOpen({
+                    status: true,
+                    taskId: id,
+                })}
             />
             <Link
                 state={{ from: location.pathname + location.search }}
@@ -114,7 +117,7 @@ TaskCard.propTypes = {
     dueDate: PropTypes.string,
     id: PropTypes.string,
     link: PropTypes.string,
-    onClickDeleteButton: PropTypes.func,
     priority: PropTypes.string,
+    setDialogOpen: PropTypes.func,
     title: PropTypes.string,
 };

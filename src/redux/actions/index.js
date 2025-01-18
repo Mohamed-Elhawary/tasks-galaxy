@@ -5,13 +5,14 @@ import {
     openFiltersAction,
     setFiltersAction,
 } from "./filters";
-import { createTaskAction, setTasksListAction } from "./tasks";
+import { createTaskAction, deleteTaskAction, setTasksListAction } from "./tasks";
 
 export {
     clearFiltersAction,
     closeAlertAction,
     closeFiltersAction,
     createTaskAction,
+    deleteTaskAction,
     openAlertAction,
     openFiltersAction,
     setFiltersAction,

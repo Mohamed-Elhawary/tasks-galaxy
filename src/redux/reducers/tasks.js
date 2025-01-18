@@ -1,8 +1,11 @@
 import { randomDescriptionsData } from "data";
 import { priorityOptionsData, statusOptionsData } from "data/tasks";
-import { CREATE_TASK, SET_TASKS_LIST } from "redux/types";
+import { CREATE_TASK, DELETE_TASK, SET_TASKS_LIST } from "redux/types";
 import {
-    generateFutureDateHandler, generateRandomIDHandler, generateRandomItemHandler, updateStateHandler,
+    generateFutureDateHandler,
+    generateRandomIDHandler,
+    generateRandomItemHandler,
+    updateStateHandler,
 } from "utils";
 
 const initialState = {
@@ -69,6 +72,30 @@ const createTask = (state, task) => {
     );
 };
 
+const deleteTask = (state, id) => {
+    const { tasks } = state;
+
+    for (const [status, taskList] of Object.entries(tasks)) { // eslint-disable-line
+        const taskIndex = taskList.findIndex((task) => task.id === id);
+
+        if (taskIndex !== -1) {
+            taskList.splice(
+                taskIndex,
+                1,
+            );
+
+            localStorage.setItem( // eslint-disable-line
+                "tasks",
+                JSON.stringify(tasks),
+            );
+
+            return updateStateHandler(
+                state,
+                { tasks },
+            );
+        }
+    }
+};
 const tasksReducer = (state = initialState, action) => {
     const {
         payload,
@@ -77,6 +104,7 @@ const tasksReducer = (state = initialState, action) => {
 
     const {
         fromStorage,
+        id,
         task,
         tasks,
     } = payload || {};
@@ -101,6 +129,12 @@ const tasksReducer = (state = initialState, action) => {
         return createTask(
             state,
             task,
+        );
+    }
+    case DELETE_TASK: {
+        return deleteTask(
+            state,
+            id,
         );
     }
     default: return state;

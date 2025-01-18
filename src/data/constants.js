@@ -58,6 +58,7 @@ const constantsData = {
         dateLater: "Due Date To must be later than Due Date From, please be sure that you enter a valid Due Date From",
         tasks: {
             creatingTask: "Creating task...",
+            deleteTaskConfirmation: "Are you sure you want to delete this task?",
             deletingTask: "Deleting task...",
             editingTask: "Editing task...",
             form: {

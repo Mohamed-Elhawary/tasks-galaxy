@@ -10,7 +10,7 @@ import { StyledDetails } from "styles";
 const Details = ({
     data,
     module,
-    onClickDeleteButton,
+    setDialogOpen,
 }) => {
     const location = useLocation();
 
@@ -74,7 +74,10 @@ const Details = ({
                             editRouteUrl={urlsData.routes?.[module]?.edit}
                             id={id}
                             withoutView
-                            onClickDeleteButton={onClickDeleteButton}
+                            onClickDeleteButton={() => setDialogOpen({
+                                status: true,
+                                taskId: id,
+                            })}
                         />
                     </Grid>
                     <Grid
@@ -173,5 +176,5 @@ export default Details;
 Details.propTypes = {
     data: PropTypes.object,
     module: PropTypes.string,
-    onClickDeleteButton: PropTypes.func,
+    setDialogOpen: PropTypes.func,
 };

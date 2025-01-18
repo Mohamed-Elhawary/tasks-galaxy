@@ -1,13 +1,18 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { Loader, TaskCard } from "atoms";
+import { Dialog, Loader, TaskCard } from "atoms";
 import { Filters, Meta, PageHead } from "components";
 import { constantsData, statusOptionsData, urlsData } from "data";
-import { useTasksList } from "hooks";
-import { useEffect } from "react";
+import { useDeleteTask, useTasksList } from "hooks";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFiltersAction, closeFiltersAction } from "redux/actions";
 
 const TasksListView = () => {
+    const [open, setOpen] = useState({
+        status: false,
+        taskId: null,
+    });
+
     const dispatch = useDispatch();
 
     const { tasks } = useSelector((state) => state.tasksReducer);
@@ -20,10 +25,21 @@ const TasksListView = () => {
     } = urlsData.routes.tasks;
 
     const {
+        buttons: { delete: deleteBtnConstant },
+        msgs: {
+            tasks: {
+                deleteTaskConfirmation: deleteTaskConfirmationMsgConstant,
+            },
+        },
         titles: { tasksList: tasksListTitleConstant },
     } = constantsData;
 
     const { loading } = useTasksList();
+
+    const {
+        deleteTask,
+        loading: deleteLoading,
+    } = useDeleteTask();
 
     useEffect(
         () => {
@@ -44,7 +60,21 @@ const TasksListView = () => {
                 hasFilters
             />
             {filtersOpened && <Filters module="tasks" />}
-            {loading ? <Loader /> : (
+            <Dialog
+                confirmButtonText={deleteBtnConstant}
+                open={open.status}
+                setDialogOpen={setOpen}
+                title={deleteTaskConfirmationMsgConstant}
+                onClickConfirmButton={() => {
+                    deleteTask(open.taskId);
+
+                    setOpen({
+                        status: false,
+                        taskId: null,
+                    });
+                }}
+            />
+            {loading || deleteLoading ? <Loader /> : (
                 <Box className="tasks">
                     <Grid
                         spacing={2}
@@ -100,6 +130,7 @@ const TasksListView = () => {
                                                 key={id}
                                                 link={`${tasksRouteUrl}/${id}`}
                                                 priority={priority}
+                                                setDialogOpen={setOpen}
                                                 title={title}
                                             />
                                         )) : null}

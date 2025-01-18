@@ -18,23 +18,28 @@ const Dialog = ({
     <MuiDialog
         aria-labelledby="confirm-dialog"
         open={open}
-        onClose={() => setDialogOpen(false)}
+        onClose={() => setDialogOpen({
+            status: false,
+            taskId: null,
+        })}
     >
         <DialogTitle id="confirm-delete-dialog">Confirm Delete</DialogTitle>
         <DialogContent>
-            <DialogContentText>
-                {`Are you sure you want to delete ${title} ?`}
-            </DialogContentText>
+            <DialogContentText>{title}</DialogContentText>
         </DialogContent>
         <DialogActions>
             <Button
                 color="primary"
-                onClick={() => setDialogOpen(false)}
+                onClick={() => setDialogOpen({
+                    status: false,
+                    taskId: null,
+                })}
             >
                 Cancel
             </Button>
             <Button
                 color="error"
+                variant="contained"
                 onClick={onClickConfirmButton}
             >
                 {confirmButtonText}

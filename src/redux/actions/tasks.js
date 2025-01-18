@@ -1,9 +1,14 @@
-import { SET_TASKS_LIST } from "redux/types";
+import { CREATE_TASK, SET_TASKS_LIST } from "redux/types";
 
-export const setTasksList = (tasks, fromStorage) => ({
+export const setTasksListAction = (tasks, fromStorage) => ({
     payload: {
         fromStorage,
         tasks,
     },
     type: SET_TASKS_LIST,
+});
+
+export const createTaskAction = (task) => ({
+    payload: { task },
+    type: CREATE_TASK,
 });

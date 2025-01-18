@@ -12,7 +12,7 @@ import { constantsData } from "data";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { closeFilters, openFilters } from "redux/actions";
+import { closeFiltersAction, openFiltersAction } from "redux/actions";
 import { StyledPageHead, StyledPageHeadTitle } from "styles";
 import { theme } from "theme";
 
@@ -84,7 +84,7 @@ const PageHead = ({
                 )}
                 {hasFilters && (
                     <Tooltip title={filtersOpened ? closeFiltersBtnConstant : openFiltersBtnConstant}>
-                        <IconButton onClick={() => (filtersOpened ? dispatch(closeFilters()) : dispatch(openFilters()))}>
+                        <IconButton onClick={() => (filtersOpened ? dispatch(closeFiltersAction()) : dispatch(openFiltersAction()))}>
                             <Badge
                                 badgeContent={Object.values(filters)?.length}
                                 color={Object.keys(filters)?.length > 0 ? "error" : "default"}

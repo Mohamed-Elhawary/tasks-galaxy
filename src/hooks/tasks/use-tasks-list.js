@@ -2,7 +2,7 @@ import { urlsData } from "data";
 import { useApisClient } from "hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openAlert, setTasksList } from "redux/actions";
+import { openAlertAction, setTasksListAction } from "redux/actions";
 
 const useTasksList = () => {
     const [loading, setLoading] = useState(true);
@@ -86,10 +86,10 @@ const useTasksList = () => {
                     null,
                 ).
                     then(({ data: responseData }) => {
-                        if (localStorage.getItem("tasks")) dispatch(setTasksList(filterTasksHandler(), true)); // eslint-disable-line
-                        else dispatch(setTasksList(responseData));
+                        if (localStorage.getItem("tasks")) dispatch(setTasksListAction(filterTasksHandler(), true)); // eslint-disable-line
+                        else dispatch(setTasksListAction(responseData));
                     })["catch"]((err) => {
-                        dispatch(openAlert(
+                        dispatch(openAlertAction(
                             err.response.data.message,
                             "error",
                         ));
@@ -97,7 +97,7 @@ const useTasksList = () => {
                         setLoading(false);
                     });
             } else {
-                dispatch(setTasksList(JSON.parse(localStorage.getItem("tasks")), true)); // eslint-disable-line
+                dispatch(setTasksListAction(JSON.parse(localStorage.getItem("tasks")), true)); // eslint-disable-line
 
                 setTimeout(
                     () => {

@@ -5,7 +5,7 @@ import { constantsData, statusOptionsData, urlsData } from "data";
 import { useTasksList } from "hooks";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilters, closeFilters } from "redux/actions";
+import { clearFiltersAction, closeFiltersAction } from "redux/actions";
 
 const TasksListView = () => {
     const dispatch = useDispatch();
@@ -27,9 +27,9 @@ const TasksListView = () => {
 
     useEffect(
         () => {
-            dispatch(clearFilters());
+            dispatch(clearFiltersAction());
 
-            dispatch(closeFilters());
+            dispatch(closeFiltersAction());
         },
         [], //eslint-disable-line
     );

@@ -1,6 +1,6 @@
 import { Snackbar as MuiSnackbar, Stack } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
-import { closeAlert } from "redux/actions";
+import { closeAlertAction } from "redux/actions";
 
 import Alert from "../alert";
 
@@ -11,7 +11,7 @@ const Snackbar = () => {
 
     const status = useSelector((state) => state.alertReducer.status);
 
-    const closeSnackbarHandler = () => dispatch(closeAlert());
+    const closeSnackbarHandler = () => dispatch(closeAlertAction());
 
     return (
         <Stack spacing={2}>

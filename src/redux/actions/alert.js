@@ -1,6 +1,6 @@
 import { CLOSE_ALERT, OPEN_ALERT } from "redux/types";
 
-export const openAlert = (message, status) => ({
+export const openAlertAction = (message, status) => ({
     payload: {
         message,
         status,
@@ -8,4 +8,4 @@ export const openAlert = (message, status) => ({
     type: OPEN_ALERT,
 });
 
-export const closeAlert = () => ({ type: CLOSE_ALERT });
+export const closeAlertAction = () => ({ type: CLOSE_ALERT });

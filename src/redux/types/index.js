@@ -5,12 +5,13 @@ import {
     OPEN_FILTERS,
     SET_FILTERS,
 } from "./filters";
-import { SET_TASKS_LIST } from "./tasks";
+import { CREATE_TASK, SET_TASKS_LIST } from "./tasks";
 
 export {
     CLEAR_FILTERS,
     CLOSE_ALERT,
     CLOSE_FILTERS,
+    CREATE_TASK,
     OPEN_ALERT,
     OPEN_FILTERS,
     SET_FILTERS,

@@ -1,6 +1,6 @@
 import { randomDescriptionsData } from "data";
 import { priorityOptionsData, statusOptionsData } from "data/tasks";
-import { SET_TASKS_LIST } from "redux/types";
+import { CREATE_TASK, SET_TASKS_LIST } from "redux/types";
 import { generateFutureDateHandler, generateRandomItemHandler, updateStateHandler } from "utils";
 
 const initialState = {
@@ -40,6 +40,28 @@ const setTasksList = (state, tasks) => updateStateHandler(
     { tasks },
 );
 
+const createTask = (state, task) => {
+    const tasks = {
+        ...state.tasks,
+        [task.status]: [
+            task,
+            ...state.tasks[task.status],
+        ],
+    };
+
+    console.log(tasks);
+
+    localStorage.setItem( // eslint-disable-line
+        "tasks",
+        JSON.stringify(tasks),
+    );
+
+    return updateStateHandler(
+        state,
+        { tasks },
+    );
+};
+
 const tasksReducer = (state = initialState, action) => {
     const {
         payload,
@@ -48,6 +70,7 @@ const tasksReducer = (state = initialState, action) => {
 
     const {
         fromStorage,
+        task,
         tasks,
     } = payload || {};
 
@@ -65,6 +88,12 @@ const tasksReducer = (state = initialState, action) => {
         return setTasksList(
             state,
             restructuredTasks,
+        );
+    }
+    case CREATE_TASK: {
+        return createTask(
+            state,
+            task,
         );
     }
     default: return state;

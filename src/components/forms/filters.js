@@ -8,7 +8,7 @@ import { PropTypes } from "prop-types";
 import { useEffect, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilters, openAlert, setFilters } from "redux/actions";
+import { clearFiltersAction, openAlertAction, setFiltersAction } from "redux/actions";
 import { useFiltersSchema } from "schemas";
 
 const FiltersForm = ({ module }) => {
@@ -44,7 +44,6 @@ const FiltersForm = ({ module }) => {
             apply: applyBtnConstant,
             reset: resetBtnConstant,
         },
-
     } = constantsData;
 
     const renderFiltersHandler = (
@@ -108,11 +107,11 @@ const FiltersForm = ({ module }) => {
             };
         }
 
-        dispatch(setFilters({ ...tasksFilter && { ...tasksFilter } }));
+        dispatch(setFiltersAction({ ...tasksFilter && { ...tasksFilter } }));
     };
 
     const resetFiltersHandler = () => {
-        dispatch(clearFilters());
+        dispatch(clearFiltersAction());
 
         reset();
 
@@ -139,7 +138,7 @@ const FiltersForm = ({ module }) => {
     useEffect(
         () => {
             if (Object.values(Object.values(errors)).length > 0) {
-                dispatch(openAlert(
+                dispatch(openAlertAction(
                     Object.values(errors)[0].message,
                     "error",
                 ));

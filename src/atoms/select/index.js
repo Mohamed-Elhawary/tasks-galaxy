@@ -37,7 +37,6 @@ const Select = ({
                 label={label}
                 name={name}
                 placeholder={label}
-                valuesLength={defaultValue?.length}
                 variant="outlined"
             />
         )}

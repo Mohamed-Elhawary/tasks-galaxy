@@ -1,18 +1,19 @@
-import { closeAlert, openAlert } from "./alert";
+import { closeAlertAction, openAlertAction } from "./alert";
 import {
-    clearFilters,
-    closeFilters,
-    openFilters,
-    setFilters,
+    clearFiltersAction,
+    closeFiltersAction,
+    openFiltersAction,
+    setFiltersAction,
 } from "./filters";
-import { setTasksList } from "./tasks";
+import { createTaskAction, setTasksListAction } from "./tasks";
 
 export {
-    clearFilters,
-    closeAlert,
-    closeFilters,
-    openAlert,
-    openFilters,
-    setFilters,
-    setTasksList,
+    clearFiltersAction,
+    closeAlertAction,
+    closeFiltersAction,
+    createTaskAction,
+    openAlertAction,
+    openFiltersAction,
+    setFiltersAction,
+    setTasksListAction,
 };

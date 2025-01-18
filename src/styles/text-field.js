@@ -4,7 +4,6 @@ import { TextField } from "@mui/material";
 const StyledTextField = styled(TextField)(({
     fullWidth,
     isCalendar,
-    valuesLength,
 }) => ({
     ...fullWidth && { width: "100%" },
     "&.filter-input": {
@@ -34,9 +33,6 @@ const StyledTextField = styled(TextField)(({
 
         },
         "& input": {
-            "& :placeholder": {
-                opacity: valuesLength !== 0 && 1,
-            },
             fontSize: 12,
             lineHeight: "10px",
             padding: "2px 2px !important",
@@ -47,7 +43,7 @@ const StyledTextField = styled(TextField)(({
             "&.Mui-focused": { top: 0 },
             "&.MuiFormLabel-filled": { top: 0 },
             fontSize: 12,
-            top: (valuesLength === 0 || !valuesLength) && "-8px",
+            top: "-8px",
         },
         width: 140,
     },

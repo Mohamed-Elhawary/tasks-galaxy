@@ -13,7 +13,7 @@ const axios = (params, isFormData) => axiosBase.create({
     },
 });
 
-axios.interceptors.request.use(
+axios.interceptors?.request?.use(
     (config) => {
         const token = Cookies.get(tokenConstant);
 
@@ -36,7 +36,7 @@ axios.interceptors.request.use(
     },
 );
 
-axios.interceptors.response.use(
+axios.interceptors?.response?.use(
     (response) => {
         console.log(
             "Response:",

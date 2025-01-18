@@ -1,3 +1,4 @@
 import axios from "./axios";
+import { updateStateHandler } from "./shared";
 
-export { axios };
+export { axios, updateStateHandler };

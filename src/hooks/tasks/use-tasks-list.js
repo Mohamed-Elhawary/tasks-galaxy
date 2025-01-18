@@ -2,17 +2,17 @@ import { urlsData } from "data";
 import { useApisClient } from "hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTasksList } from "redux/actions";
+import { openAlert, setTasksList } from "redux/actions";
 
 const useTasksList = () => {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
 
     const { tasks } = useSelector((state) => state.tasksReducer);
 
     const filters = useSelector((state) => state.filtersReducer.filters);
-    console.log(tasks);
+
     const { get } = useApisClient();
 
     const queryParams = new URLSearchParams();
@@ -89,7 +89,10 @@ const useTasksList = () => {
                         if (localStorage.getItem("tasks")) dispatch(setTasksList(filterTasksHandler(), true)); // eslint-disable-line
                         else dispatch(setTasksList(responseData));
                     })["catch"]((err) => {
-                        console.log(err);
+                        dispatch(openAlert(
+                            err.response.data.message,
+                            "error",
+                        ));
                     })["finally"](() => {
                         setLoading(false);
                     });

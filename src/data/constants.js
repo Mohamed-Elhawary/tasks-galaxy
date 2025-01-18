@@ -30,8 +30,8 @@ const constantsData = {
     metaDescription: "Tasks Galaxy is a smart task management dashboard App that allows you to organize and add your daily tasks including other features, like drag & drop and changing task status from to-do status to in-progress, pending, or done status.",
     metaKeywords: "tasks, galaxy, task management, dashboard, organize, daily tasks, drag & drop, task status, to-do, in-progress, pending, done",
     msgs: {
-        dateEarlier: "From date must be earlier than To date, please be sure that you enter a valid To date",
-        dateLater: "To date must be later than From date, please be sure that you enter a valid From date",
+        dateEarlier: "Due Date From must be earlier than Due Date To, please be sure that you enter a valid Due Date TO",
+        dateLater: "Due Date To must be later than Due Date From, please be sure that you enter a valid Due Date From",
     },
     noOptions: "No options",
     priorities: {

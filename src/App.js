@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Snackbar } from "atoms";
 import { useRoutes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import { Routes } from "routes";
@@ -22,6 +23,7 @@ const App = () => {
         <CacheProvider value={cacheLtR}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
+                <Snackbar />
                 <NetworkErrorBoundary>{routes}</NetworkErrorBoundary>
                 <ToastContainer
                     autoClose={false}

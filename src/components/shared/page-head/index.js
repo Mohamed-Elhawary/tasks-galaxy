@@ -60,6 +60,7 @@ const PageHead = ({
                 )}
                 <Typography
                     component="h1"
+                    mb={2}
                     variant="h4"
                 >
                     {title}

@@ -1,3 +1,4 @@
+import { closeAlert, openAlert } from "./alert";
 import {
     clearFilters,
     closeFilters,
@@ -8,7 +9,9 @@ import { setTasksList } from "./tasks";
 
 export {
     clearFilters,
+    closeAlert,
     closeFilters,
+    openAlert,
     openFilters,
     setFilters,
     setTasksList,

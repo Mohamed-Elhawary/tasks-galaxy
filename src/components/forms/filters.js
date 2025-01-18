@@ -8,7 +8,7 @@ import { PropTypes } from "prop-types";
 import { useEffect, useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFilters, setFilters } from "redux/actions";
+import { clearFilters, openAlert, setFilters } from "redux/actions";
 import { useFiltersSchema } from "schemas";
 
 const FiltersForm = ({ module }) => {
@@ -86,11 +86,7 @@ const FiltersForm = ({ module }) => {
             );
         }
     };
-    console.log(
-        filters,
-        getValues(),
-        errors,
-    );
+
     const submitFormHandler = (values) => { // eslint-disable-line
         const {
             dueDateFrom,
@@ -138,6 +134,18 @@ const FiltersForm = ({ module }) => {
             if (Object.values(dirtyFields).length > 0) setDisableResetAllButton(false);
         },
         [dirtyFields, filters], // eslint-disable-line
+    );
+
+    useEffect(
+        () => {
+            if (Object.values(Object.values(errors)).length > 0) {
+                dispatch(openAlert(
+                    Object.values(errors)[0].message,
+                    "error",
+                ));
+            }
+        },
+        [errors], // eslint-disable-line
     );
 
     return (

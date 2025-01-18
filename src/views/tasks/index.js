@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import { TaskCard } from "atoms";
+import { Loader, TaskCard } from "atoms";
 import { Filters, Meta, PageHead } from "components";
 import { constantsData, statusOptionsData, urlsData } from "data";
 import { useTasksList } from "hooks";
@@ -34,8 +34,6 @@ const TasksListView = () => {
         [], //eslint-disable-line
     );
 
-    if (loading) return <span>Loading...</span>;
-
     return (
         <>
             <Meta title={tasksListTitleConstant} />
@@ -46,70 +44,72 @@ const TasksListView = () => {
                 hasFilters
             />
             {filtersOpened && <Filters module="tasks" />}
-            <Box className="tasks">
-                <Grid
-                    spacing={2}
-                    container
-                >
-                    {statusOptionsData.map((column) => (
-                        <Grid
-                            key={column}
-                            lg={3}
-                            md={6}
-                            xs={12}
-                            sx={{
-                                marginBottom: {
-                                    xl: 0,
-                                    xs: 4,
-                                },
-                                maxHeight: "1200px",
-                                overflowY: "auto",
-                            }}
-                            item
-                        >
-                            <Box
+            {loading ? <Loader /> : (
+                <Box className="tasks">
+                    <Grid
+                        spacing={2}
+                        container
+                    >
+                        {statusOptionsData.map((column) => (
+                            <Grid
+                                key={column}
+                                lg={3}
+                                md={6}
+                                xs={12}
                                 sx={{
-                                    backgroundColor: "#f4f4f4",
-                                    borderRadius: 5,
-                                    boxShadow: 1,
-                                    minHeight: 400,
-                                    padding: 2,
+                                    maxHeight: "1200px",
+                                    overflowY: "auto",
                                 }}
+                                item
                             >
-                                <Typography
-                                    sx={{ marginBottom: 2 }}
-                                    variant="h5"
-                                >
-                                    {column}
-                                </Typography>
                                 <Box
-                                    display="flex"
-                                    flexDirection="column"
-                                    gap={2}
+                                    sx={{
+                                        backgroundColor: "#f4f4f4",
+                                        borderRadius: 5,
+                                        boxShadow: 1,
+                                        marginBottom: {
+                                            xl: 1,
+                                            xs: 4,
+                                        },
+                                        minHeight: 400,
+                                        padding: 2,
+                                    }}
                                 >
-                                    {tasks?.[column]?.length > 0 ? tasks?.[column]?.map(({
-                                        description,
-                                        dueDate,
-                                        id,
-                                        priority,
-                                        title,
-                                    }) => (
-                                        <TaskCard
-                                            description={description}
-                                            dueDate={dueDate}
-                                            id={id}
-                                            key={id}
-                                            link={`${tasksRouteUrl}/${id}`}
-                                            priority={priority}
-                                            title={title}
-                                        />
-                                    )) : null}
+                                    <Typography
+                                        sx={{ marginBottom: 2 }}
+                                        variant="h5"
+                                    >
+                                        {column}
+                                    </Typography>
+                                    <Box
+                                        display="flex"
+                                        flexDirection="column"
+                                        gap={2}
+                                    >
+                                        {tasks?.[column]?.length > 0 ? tasks?.[column]?.map(({
+                                            description,
+                                            dueDate,
+                                            id,
+                                            priority,
+                                            title,
+                                        }) => (
+                                            <TaskCard
+                                                description={description}
+                                                dueDate={dueDate}
+                                                id={id}
+                                                key={id}
+                                                link={`${tasksRouteUrl}/${id}`}
+                                                priority={priority}
+                                                title={title}
+                                            />
+                                        )) : null}
+                                    </Box>
                                 </Box>
-                            </Box>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
+            )}
         </>
     );
 };

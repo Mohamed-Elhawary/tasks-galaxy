@@ -1,12 +1,9 @@
 import { constantsData } from "data";
 import { PropTypes } from "prop-types";
 import { Helmet } from "react-helmet";
-import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 
 const Meta = ({ title }) => {
-    const { t } = useTranslation();
-
     const location = useLocation();
 
     const {
@@ -22,7 +19,7 @@ const Meta = ({ title }) => {
                 {" "}
                 |
                 {" "}
-                {t("labels.cmsTitle")}
+                {tasksGalaxyTitleConstant}
             </title>
             <meta
                 content={tasksGalaxyTitleConstant}

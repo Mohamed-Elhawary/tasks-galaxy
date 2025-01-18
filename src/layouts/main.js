@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout = () => (
     <Box display="flex">
         <CssBaseline />
-        <Content>
+        <Content maxWidth={false}>
             <Outlet />
         </Content>
     </Box>

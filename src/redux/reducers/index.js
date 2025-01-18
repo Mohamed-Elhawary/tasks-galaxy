@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
 
 import filtersReducer from "./filters";
+import tasksReducer from "./tasks";
 
 export const initialState = {
     key: "root",
@@ -9,4 +10,7 @@ export const initialState = {
     whitelist: [],
 };
 
-export const rootReducer = combineReducers({ filtersReducer });
+export const rootReducer = combineReducers({
+    filtersReducer,
+    tasksReducer,
+});

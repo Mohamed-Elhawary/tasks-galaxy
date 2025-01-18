@@ -6,6 +6,7 @@ import {
     Box,
     IconButton,
     Tooltip,
+    Typography,
 } from "@mui/material";
 import { constantsData } from "data";
 import PropTypes from "prop-types";
@@ -19,13 +20,14 @@ const PageHead = ({
     addRouteUrl,
     backAction,
     backRouteUrl,
-    filtersCount,
-    filtersModule,
     hasAdd,
     hasBack,
     hasFilters,
+    title,
 }) => {
     const filtersOpened = useSelector((state) => state.filtersReducer.open);
+
+    const filters = useSelector((state) => state.filtersReducer?.filters);
 
     const dispatch = useDispatch();
 
@@ -56,6 +58,12 @@ const PageHead = ({
                         </Tooltip>
                     </Link>
                 )}
+                <Typography
+                    component="h1"
+                    variant="h4"
+                >
+                    {title}
+                </Typography>
             </StyledPageHeadTitle>
             <Box
                 display="flex"
@@ -79,10 +87,10 @@ const PageHead = ({
                 )}
                 {hasFilters && (
                     <Tooltip title={filtersOpened ? closeFiltersBtnConstant : openFiltersBtnConstant}>
-                        <IconButton onClick={() => (filtersOpened ? dispatch(closeFilters()) : dispatch(openFilters(filtersModule)))}>
+                        <IconButton onClick={() => (filtersOpened ? dispatch(closeFilters()) : dispatch(openFilters()))}>
                             <Badge
-                                badgeContent={filtersCount}
-                                color="error"
+                                badgeContent={<span />}
+                                color={Object.keys(filters)?.length > 0 ? "error" : "default"}
                                 variant="solid"
                             >
                                 <FilterListIcon
@@ -109,9 +117,8 @@ PageHead.propTypes = {
     addRouteUrl: PropTypes.string,
     backAction: PropTypes.func,
     backRouteUrl: PropTypes.string,
-    filtersCount: PropTypes.number,
-    filtersModule: PropTypes.string,
     hasAdd: PropTypes.bool,
     hasBack: PropTypes.bool,
     hasFilters: PropTypes.bool,
+    title: PropTypes.string,
 };

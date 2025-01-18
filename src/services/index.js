@@ -1,18 +1,9 @@
 import { axios } from "utils";
 
-export const getData = async (apiUrl, id, params, config) => {
+export const getData = async (apiUrl, id, params) => {
     const fullApiUrl = id ? `${apiUrl}${"/"}${id}` : apiUrl;
 
-    return axios(params).get(
-        fullApiUrl,
-        {
-            headers: {
-                Authorization: `Bearer ${config?.token}`,
-                "Content-Type": "application/json",
-            },
-
-        },
-    );
+    return axios(params).get(fullApiUrl);
 };
 
 export const postData = async (apiUrl, id, data, config) => {
@@ -24,9 +15,6 @@ export const postData = async (apiUrl, id, data, config) => {
     ).post(
         fullApiUrl,
         data,
-        {
-            headers: { Authorization: `Bearer ${config?.token}` },
-        },
     );
 };
 
@@ -35,16 +23,12 @@ export const patchData = async (
     id,
     data,
     params,
-    config,
 ) => {
     const fullApiUrl = id ? `${apiUrl}/${id}` : apiUrl;
 
     return axios(params).patch(
         fullApiUrl,
         data,
-        {
-            headers: { Authorization: `Bearer ${config?.token}` },
-        },
     );
 };
 
@@ -53,24 +37,13 @@ export const updateData = async (
     id,
     data,
     params,
-    config,
 ) => {
     const fullApiUrl = id ? `${apiUrl}/${id}` : apiUrl;
 
     return axios(params).put(
         fullApiUrl,
         data,
-        {
-            headers: { Authorization: `Bearer ${config?.token}` },
-        },
     );
 };
 
-export const deleteData = async (apiUrl, id, config) => axios(null)["delete"](
-    `${apiUrl}${id ? `/${id}` : ""}`,
-    {
-        headers: { Authorization: `Bearer ${config?.token}` },
-    },
-)["catch"]((err) => {
-    if (err?.response?.status === 401 && config?.logoutAction) config?.logoutAction();
-});
+export const deleteData = async (apiUrl, id) => axios(null)["delete"](`${apiUrl}${id ? `/${id}` : ""}`);

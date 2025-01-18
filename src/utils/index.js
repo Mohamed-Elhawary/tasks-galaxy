@@ -1,5 +1,11 @@
 import axios from "./axios";
 import NetworkErrorBoundary from "./network-error-boundary";
-import { updateStateHandler } from "./shared";
+import { generateFutureDateHandler, generateRandomItemHandler, updateStateHandler } from "./shared";
 
-export { axios, NetworkErrorBoundary, updateStateHandler };
+export {
+    axios,
+    generateFutureDateHandler,
+    generateRandomItemHandler,
+    NetworkErrorBoundary,
+    updateStateHandler,
+};

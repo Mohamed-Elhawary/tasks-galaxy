@@ -1,8 +1,4 @@
 import axiosBase from "axios";
-import { constantsData } from "data";
-import Cookies from "js-cookie";
-
-const { token: tokenConstant } = constantsData;
 
 const axios = (params, isFormData) => axiosBase.create({
     baseURL: process.env.REACT_APP_BACKEND_DOMAIN,    //eslint-disable-line
@@ -15,10 +11,6 @@ const axios = (params, isFormData) => axiosBase.create({
 
 axios.interceptors?.request?.use(
     (config) => {
-        const token = Cookies.get(tokenConstant);
-
-        if (token) config.headers.Authorization = `Bearer ${token}`; // eslint-disable-line
-
         console.log(
             "Request:",
             config,

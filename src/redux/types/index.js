@@ -5,7 +5,12 @@ import {
     OPEN_FILTERS,
     SET_FILTERS,
 } from "./filters";
-import { CREATE_TASK, DELETE_TASK, SET_TASKS_LIST } from "./tasks";
+import {
+    CREATE_TASK,
+    DELETE_TASK,
+    EDIT_TASK,
+    SET_TASKS_LIST,
+} from "./tasks";
 
 export {
     CLEAR_FILTERS,
@@ -13,6 +18,7 @@ export {
     CLOSE_FILTERS,
     CREATE_TASK,
     DELETE_TASK,
+    EDIT_TASK,
     OPEN_ALERT,
     OPEN_FILTERS,
     SET_FILTERS,

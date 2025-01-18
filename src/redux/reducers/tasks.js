@@ -1,6 +1,8 @@
 import { randomDescriptionsData } from "data";
 import { priorityOptionsData, statusOptionsData } from "data/tasks";
-import { CREATE_TASK, DELETE_TASK, SET_TASKS_LIST } from "redux/types";
+import {
+    CREATE_TASK, DELETE_TASK, EDIT_TASK, SET_TASKS_LIST,
+} from "redux/types";
 import {
     generateFutureDateHandler,
     generateRandomIDHandler,
@@ -55,6 +57,7 @@ const createTask = (state, task) => {
                 ...task,
                 createdAt: new Date(),
                 id: generateRandomIDHandler(),
+                isCreatedLocally: true,
                 updatedAt: new Date(),
             },
             ...state.tasks[task.status],
@@ -70,6 +73,47 @@ const createTask = (state, task) => {
         state,
         { tasks },
     );
+};
+
+const editTask = (state, task) => {
+    const { tasks } = state;
+
+    for (const [status, taskList] of Object.entries(tasks)) { // eslint-disable-line
+        const taskIndex = taskList.findIndex((oneTask) => oneTask.id === task.id);
+
+        if (taskIndex !== -1) {
+            const editedTask = {
+                ...taskList[taskIndex],
+                ...task,
+            };
+
+            if (editedTask.status !== status) {
+                // Remove the task from the current group
+                taskList.splice(
+                    taskIndex,
+                    1,
+                );
+
+                // Add the task to the correct status group
+                tasks[editedTask.status] = tasks[editedTask.status] || [];
+
+                tasks[editedTask.status].unshift(editedTask);
+            } else {
+                // Update the task in the current group
+                taskList[taskIndex] = editedTask;
+            }
+
+            localStorage.setItem( // eslint-disable-line
+                "tasks",
+                JSON.stringify(tasks),
+            );
+
+            return updateStateHandler(
+                state,
+                { tasks },
+            );
+        }
+    }
 };
 
 const deleteTask = (state, id) => {
@@ -127,6 +171,12 @@ const tasksReducer = (state = initialState, action) => {
     }
     case CREATE_TASK: {
         return createTask(
+            state,
+            task,
+        );
+    }
+    case EDIT_TASK: {
+        return editTask(
             state,
             task,
         );

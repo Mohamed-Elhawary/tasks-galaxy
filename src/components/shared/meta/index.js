@@ -1,11 +1,8 @@
 import { constantsData } from "data";
 import { PropTypes } from "prop-types";
 import { Helmet } from "react-helmet";
-import { useLocation } from "react-router-dom";
 
 const Meta = ({ title }) => {
-    const location = useLocation();
-
     const {
         metaDescription: metaDescriptionConstant,
         metaKeywords: metaKeywordsConstant,
@@ -36,14 +33,6 @@ const Meta = ({ title }) => {
             <meta
                 content={metaDescriptionConstant}
                 property="og:description"
-            />
-            <meta
-                content={`${process.env.REACT_APP_HOST}/logo.png`} // eslint-disable-line
-                property="og:image"
-            />
-            <meta
-                content={process.env.REACT_APP_HOST + location.pathname + location.search} // eslint-disable-line
-                property="og:url"
             />
         </Helmet>
     );

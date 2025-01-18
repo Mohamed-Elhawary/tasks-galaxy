@@ -21,6 +21,7 @@ const FormContainer = ({
 
     const {
         create: createBtnConstant,
+        edit: editBtnConstant,
         save: saveBtnConstant,
     } = constantsData.buttons;
 
@@ -51,14 +52,14 @@ const FormContainer = ({
                                     gap={2}
                                 >
                                     <LoadingButton
-                                        disabled={(Object.keys(dirtyFields).length === 0 && action === "edit")}
+                                        disabled={(Object.keys(dirtyFields).length === 0 && action === editBtnConstant)}
                                         loading={loading}
                                         size="large"
                                         sx={{ color: theme.palette.grey[100] }}
                                         type="submit"
                                         variant="contained"
                                     >
-                                        {action === "edit" ? saveBtnConstant : createBtnConstant}
+                                        {action === editBtnConstant ? saveBtnConstant : createBtnConstant}
                                     </LoadingButton>
                                 </Box>
                             </Grid>

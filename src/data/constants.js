@@ -70,7 +70,7 @@ const constantsData = {
             },
             taskCreated: "Task created successfully",
             taskDeleted: "Task deleted successfully",
-            taskEdited: "Task edited successfully",
+            taskEdited: "Task saved successfully",
         },
     },
     noOptions: "No options",
@@ -81,6 +81,7 @@ const constantsData = {
     },
     titles: {
         createTask: "Create Task",
+        editTask: "Edit Task",
         notFound: "Not found",
         tasksGalaxy: "Tasks Galaxy",
         tasksList: "Tasks List",

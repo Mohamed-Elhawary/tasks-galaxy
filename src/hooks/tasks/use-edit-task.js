@@ -4,40 +4,47 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { createTaskAction, openAlertAction } from "redux/actions";
+import { editTaskAction, openAlertAction } from "redux/actions";
 
-const useCreateTask = () => {
+const useEditTask = () => {
     const [loading, setLoading] = useState(false);
 
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
-    const { post } = useApisClient();
+    const { update } = useApisClient();
 
     const {
-        creatingTask: creatingTaskMsgConstant,
-        taskCreated: taskCreatedMsgConstant,
+        editingTask: editingTaskMsgConstant,
+        taskEdited: taskCreatedMsgConstant,
     } = constantsData.msgs.tasks;
 
-    const createTask = ({
+    const editTask = ({
+        createdAt,
         description,
         dueDate,
+        id,
+        isCreatedLocally,
         priority,
         status,
         title,
     }) => {
         setLoading(true);
 
-        post(
+        update(
             urlsData.apis.tasks.url,
-            null,
+            id,
             {
+                createdAt,
                 description,
-                dueDate,
-                priority,
-                status,
+                dueDate: new Date(dueDate).toISOString(),
+                id,
+                priority: priority?.value || priority,
+                status: status?.value || status,
                 title,
+                updatedAt: new Date().toISOString(),
+                ...isCreatedLocally && { isCreatedLocally },
             },
         ).then(() => {
             dispatch(openAlertAction(
@@ -45,12 +52,16 @@ const useCreateTask = () => {
                 "success",
             ));
 
-            dispatch(createTaskAction({
+            dispatch(editTaskAction({
+                createdAt,
                 description,
                 dueDate,
-                priority,
-                status,
+                id,
+                priority: priority?.value || priority,
+                status: status?.value || status,
                 title,
+                updatedAt: new Date().toISOString(),
+                ...isCreatedLocally && { isCreatedLocally },
             }));
         })["catch"]((err) => {
             dispatch(openAlertAction(
@@ -68,15 +79,15 @@ const useCreateTask = () => {
 
     useEffect(
         () => {
-            if (loading) toast.info(creatingTaskMsgConstant);
+            if (loading) toast.info(editingTaskMsgConstant);
         },
         [loading], //eslint-disable-line
     );
 
     return {
-        createTask,
+        editTask,
         loading,
     };
 };
 
-export default useCreateTask;
+export default useEditTask;

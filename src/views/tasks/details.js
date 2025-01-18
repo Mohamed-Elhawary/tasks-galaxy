@@ -21,6 +21,8 @@ const TaskDetailsView = () => {
         loading,
     } = useGetTask(id);
 
+    const { loading: tasksListLoading } = useTasksList(Object.values(tasks).length > 0);
+
     const {
         deleteTask,
         deleted,
@@ -40,8 +42,6 @@ const TaskDetailsView = () => {
         notFound: notFoundRouteUrl,
         tasks: { url: tasksRouteUrl },
     } = urlsData.routes;
-
-    const { loading: tasksListLoading } = useTasksList(Object.values(tasks).length > 0);
 
     if (loading || tasksListLoading || deleteLoading) return <Loader />;
 

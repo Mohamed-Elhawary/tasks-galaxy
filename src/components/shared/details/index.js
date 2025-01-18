@@ -150,7 +150,7 @@ const Details = ({
                                     tag={createdAtLabelConstant}
                                     info={format(
                                         new Date(createdAt),
-                                        "EEEE, MMMM do, yyyy",
+                                        "EEEE, MMMM do, yyyy hh:mm a",
                                     )}
                                 />
                             )}
@@ -159,7 +159,7 @@ const Details = ({
                                     tag={updatedAtLabelConstant}
                                     info={format(
                                         new Date(updatedAt),
-                                        "EEEE, MMMM do, yyyy",
+                                        "EEEE, MMMM do, yyyy hh:mm a",
                                     )}
                                 />
                             )}

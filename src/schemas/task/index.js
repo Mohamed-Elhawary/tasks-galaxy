@@ -15,8 +15,8 @@ const useTaskSchema = () => {
     return yup.object({
         description: yup.string().required(requiredDescriptionMsgConstant),
         dueDate: yup.date().required(requiredDueDateMsgConstant),
-        priority: yup.string().required(requiredPriorityMsgConstant),
-        status: yup.string().required(requiredStatusMsgConstant),
+        priority: yup.mixed().required(requiredPriorityMsgConstant),
+        status: yup.mixed().required(requiredStatusMsgConstant),
         title: yup.string().required(requiredTitleMsgConstant),
     });
 };

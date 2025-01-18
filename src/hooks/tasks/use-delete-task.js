@@ -38,7 +38,7 @@ const useDeleteTask = () => {
             dispatch(deleteTaskAction(id));
         })["catch"]((err) => {
             dispatch(openAlertAction(
-                err.response.data.message,
+                err?.response?.data?.message,
                 "error",
             ));
         })["finally"](() => {

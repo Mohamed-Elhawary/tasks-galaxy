@@ -37,13 +37,13 @@ const useGetTask = (id) => {
         if (id && Object.values(tasks).length > 0) {
             setLoading(true);
 
+            const task = findTaskByIdHandler();
+
             get(
                 `${urlsData.apis.tasks.url}`,
                 id,
                 null,
             ).then(() => {
-                const task = findTaskByIdHandler();
-
                 if (task) {
                     setData({
                         status: 200,
@@ -56,10 +56,22 @@ const useGetTask = (id) => {
                     });
                 }
             })["catch"]((err) => {
-                dispatch(openAlertAction(
-                    err.response.data.message,
-                    "error",
-                ));
+                if (task) {
+                    setData({
+                        status: 200,
+                        task,
+                    });
+                } else {
+                    setData({
+                        status: 404,
+                        task: {},
+                    });
+
+                    dispatch(openAlertAction(
+                        err?.response?.data?.message,
+                        "error",
+                    ));
+                }
             })["finally"](() => {
                 setLoading(false);
             });

@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import { Routes } from "routes";
 import { prefixer } from "stylis";
 import { theme } from "theme";
+import { NetworkErrorBoundary } from "utils";
 
 const cacheLtR = createCache({
     key: "tasks-galaxy",
@@ -21,7 +22,7 @@ const App = () => {
         <CacheProvider value={cacheLtR}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                {routes}
+                <NetworkErrorBoundary>{routes}</NetworkErrorBoundary>
                 <ToastContainer
                     autoClose={false}
                     closeButton={false}

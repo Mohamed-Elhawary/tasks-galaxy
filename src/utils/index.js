@@ -1,4 +1,5 @@
 import axios from "./axios";
+import NetworkErrorBoundary from "./network-error-boundary";
 import { updateStateHandler } from "./shared";
 
-export { axios, updateStateHandler };
+export { axios, NetworkErrorBoundary, updateStateHandler };

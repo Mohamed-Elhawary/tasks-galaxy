@@ -51,3 +51,11 @@ export const renderFormControllerHandler = (
         </Grid>
     </Fragment>
 ));
+
+export const generateRandomIDHandler = () => Math.random().toString(36).substring(
+    2,
+    10,
+) + Math.random().toString(36).substring(
+    2,
+    10,
+);

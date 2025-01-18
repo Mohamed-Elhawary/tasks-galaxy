@@ -2,6 +2,7 @@ import axios from "./axios";
 import NetworkErrorBoundary from "./network-error-boundary";
 import {
     generateFutureDateHandler,
+    generateRandomIDHandler,
     generateRandomItemHandler,
     renderFormControllerHandler,
     updateStateHandler,
@@ -10,6 +11,7 @@ import {
 export {
     axios,
     generateFutureDateHandler,
+    generateRandomIDHandler,
     generateRandomItemHandler,
     NetworkErrorBoundary,
     renderFormControllerHandler,

@@ -43,6 +43,14 @@ const constantsData = {
             name: "title",
         },
     },
+    labels: {
+        createdAt: "Created At",
+        description: "Description",
+        dueDate: "Due Date",
+        priority: "Priority",
+        status: "Status",
+        updatedAt: "Updated At",
+    },
     metaDescription: "Tasks Galaxy is a smart task management dashboard App that allows you to organize and add your daily tasks including other features, like drag & drop and changing task status from to-do status to in-progress, pending, or done status.",
     metaKeywords: "tasks, galaxy, task management, dashboard, organize, daily tasks, drag & drop, task status, to-do, in-progress, pending, done",
     msgs: {

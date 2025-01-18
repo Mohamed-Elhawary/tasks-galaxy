@@ -1,7 +1,9 @@
 import { randomDescriptionsData } from "data";
 import { priorityOptionsData, statusOptionsData } from "data/tasks";
 import { CREATE_TASK, SET_TASKS_LIST } from "redux/types";
-import { generateFutureDateHandler, generateRandomItemHandler, updateStateHandler } from "utils";
+import {
+    generateFutureDateHandler, generateRandomIDHandler, generateRandomItemHandler, updateStateHandler,
+} from "utils";
 
 const initialState = {
     tasks: [],
@@ -9,12 +11,14 @@ const initialState = {
 
 const restructureTasksHandler = (tasks) => {
     const structuredTasks = tasks.map((task) => ({
+        createdAt: new Date(),
         description: generateRandomItemHandler(randomDescriptionsData),
         dueDate: generateFutureDateHandler(),
         id: task.id.toString(),
         priority: generateRandomItemHandler(priorityOptionsData),
         status: generateRandomItemHandler(statusOptionsData),
         title: task.title,
+        updatedAt: new Date(),
     }));
 
     const groupedTasks = structuredTasks.reduce(
@@ -44,12 +48,15 @@ const createTask = (state, task) => {
     const tasks = {
         ...state.tasks,
         [task.status]: [
-            task,
+            {
+                ...task,
+                createdAt: new Date(),
+                id: generateRandomIDHandler(),
+                updatedAt: new Date(),
+            },
             ...state.tasks[task.status],
         ],
     };
-
-    console.log(tasks);
 
     localStorage.setItem( // eslint-disable-line
         "tasks",

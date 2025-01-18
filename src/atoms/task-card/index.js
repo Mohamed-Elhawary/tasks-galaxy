@@ -1,21 +1,18 @@
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
     Box,
     Card as MuiCard,
     CardContent,
     Chip,
-    IconButton,
-    Menu,
-    MenuItem,
     Tooltip,
     Typography,
 } from "@mui/material";
 import { constantsData, urlsData } from "data";
 import { format } from "date-fns";
 import { PropTypes } from "prop-types";
-import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { theme } from "theme";
+
+import ActionsMenu from "../actions-menu";
 
 const TaskCard = ({
     description,
@@ -26,18 +23,9 @@ const TaskCard = ({
     priority,
     title,
 }) => {
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const navigate = useNavigate();
-
     const location = useLocation();
 
     const {
-        buttons: {
-            delete: deleteBtnConstant,
-            edit: editBtnConstant,
-            view: viewBtnConstant,
-        },
         priorities: {
             high: highPriorityConstant,
             medium: mediumPriorityConstant,
@@ -58,30 +46,12 @@ const TaskCard = ({
                 width: "100%",
             }}
         >
-            <IconButton
-                aria-label="actions"
-                sx={{
-                    position: "absolute",
-                    right: 8,
-                    top: 8,
-                }}
-                onClick={(event) => {
-                    event.stopPropagation();
-
-                    setAnchorEl(event.currentTarget);
-                }}
-            >
-                <MoreVertIcon />
-            </IconButton>
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={() => setAnchorEl(null)}
-            >
-                <MenuItem onClick={() => navigate(`${editTaskRouteUrl}/${id}`)}>{editBtnConstant}</MenuItem>
-                <MenuItem onClick={() => onClickDeleteButton(id)}>{deleteBtnConstant}</MenuItem>
-                <MenuItem onClick={() => navigate(`${tasksRouteUrl}/${id}`)}>{viewBtnConstant}</MenuItem>
-            </Menu>
+            <ActionsMenu
+                editRouteUrl={editTaskRouteUrl}
+                id={id}
+                routeUrl={tasksRouteUrl}
+                onClickDeleteButton={onClickDeleteButton}
+            />
             <Link
                 state={{ from: location.pathname + location.search }}
                 style={{ textDecoration: "none" }}
@@ -128,7 +98,7 @@ const TaskCard = ({
                         <Chip
                             label={priority}
                             size="small"
-                        color={priority === highPriorityConstant ? "error" : priority === mediumPriorityConstant ? "warning" : "success"} // eslint-disable-line
+                            color={priority === highPriorityConstant ? "error" : priority === mediumPriorityConstant ? "warning" : "success"} // eslint-disable-line
                         />
                     </CardContent>
                 </MuiCard>

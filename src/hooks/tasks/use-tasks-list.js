@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openAlertAction, setTasksListAction } from "redux/actions";
 
-const useTasksList = () => {
+const useTasksList = (isSuspended) => {
     const [loading, setLoading] = useState(true);
 
     const dispatch = useDispatch();
@@ -50,6 +50,12 @@ const useTasksList = () => {
 
     useEffect(
         () => {
+            if (isSuspended) {
+                setLoading(false);
+
+                return;
+            }
+
             setLoading(true);
 
             if (!localStorage.getItem("tasks") || Object.values(filters).length > 0) { //eslint-disable-line

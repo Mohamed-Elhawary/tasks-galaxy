@@ -1,12 +1,18 @@
+import { Loader } from "atoms";
 import { Meta, PageHead, TaskForm } from "components";
 import { constantsData, urlsData } from "data";
-import { useCreateTask } from "hooks";
+import { useCreateTask, useTasksList } from "hooks";
+import { useSelector } from "react-redux";
 
 const CreateTaskView = () => {
+    const { tasks } = useSelector((state) => state.tasksReducer);
+
     const {
         createTask,
         loading,
     } = useCreateTask();
+
+    const { loading: tasksListLoading } = useTasksList(Object.values(tasks).length > 0);
 
     const { url: tasksRouteUrl } = urlsData.routes.tasks;
 
@@ -14,6 +20,8 @@ const CreateTaskView = () => {
         buttons: { create: createBtnConstant },
         titles: { createTask: createTaskTitleConstant },
     } = constantsData;
+
+    if (tasksListLoading) return <Loader />;
 
     return (
         <>

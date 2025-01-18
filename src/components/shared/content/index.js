@@ -4,7 +4,7 @@ import { StyledContent } from "styles";
 
 const Content = ({ children }) => (
     <StyledContent>
-        <Container maxWidth={false}>
+        <Container>
             {children}
         </Container>
     </StyledContent>

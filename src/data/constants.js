@@ -5,6 +5,7 @@ const constantsData = {
     titles: {
         notFound: "Not found",
     },
+    token: "token",
 };
 
 export default constantsData;

@@ -5,13 +5,12 @@ const StyledContent = styled("main")(({ theme }) => ({
         "@media(max-width: 700px) ": { padding: 20 },
         "@media(min-width: 700px) ": { padding: 30 },
         backgroundColor: theme.palette?.grey[100],
-        borderRadius: "5px",
-        minHeight: "90vh",
-        width: "96%",
+        borderRadius: "15px",
+        minHeight: "100vh",
     },
     flexGrow: 1,
     marginBottom: 50,
-    marginTop: 100,
+    marginTop: 50,
     transition: theme?.transitions?.create(
         ["width", "margin"],
         {
@@ -19,7 +18,7 @@ const StyledContent = styled("main")(({ theme }) => ({
             easing: theme.transitions.easing.sharp,
         },
     ),
-    width: "85%",
+    width: "100%",
 }));
 
 export default StyledContent;

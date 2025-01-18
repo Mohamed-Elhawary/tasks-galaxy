@@ -1,9 +1,9 @@
-import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import {
     Badge,
     Box,
+    Button,
     IconButton,
     Tooltip,
     Typography,
@@ -72,16 +72,12 @@ const PageHead = ({
                 {hasAdd && (
                     <Box>
                         <Link to={addRouteUrl}>
-                            <Tooltip title={createBtnConstant}>
-                                <IconButton>
-                                    <AddCircleIcon
-                                        sx={{
-                                            color: theme.palette.primary.main,
-                                            fontSize: 30,
-                                        }}
-                                    />
-                                </IconButton>
-                            </Tooltip>
+                            <Button
+                                sx={{ color: theme.palette.grey[100] }}
+                                variant="contained"
+                            >
+                                {createBtnConstant}
+                            </Button>
                         </Link>
                     </Box>
                 )}
@@ -89,7 +85,7 @@ const PageHead = ({
                     <Tooltip title={filtersOpened ? closeFiltersBtnConstant : openFiltersBtnConstant}>
                         <IconButton onClick={() => (filtersOpened ? dispatch(closeFilters()) : dispatch(openFilters()))}>
                             <Badge
-                                badgeContent={<span />}
+                                badgeContent={Object.values(filters)?.length}
                                 color={Object.keys(filters)?.length > 0 ? "error" : "default"}
                                 variant="solid"
                             >

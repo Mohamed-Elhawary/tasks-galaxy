@@ -93,10 +93,11 @@ const TaskCard = ({
                             <Typography
                                 mb={2}
                                 variant="h6"
+                                width="90%"
                             >
-                                {title.length > 15 ? `${description.substring(
+                                {title.length > 25 ? `${description.substring(
                                     0,
-                                    15,
+                                    25,
                                 )}...` : title}
                             </Typography>
                         </Tooltip>

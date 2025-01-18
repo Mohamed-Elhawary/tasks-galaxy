@@ -1,12 +1,18 @@
 import { Box, Grid, Typography } from "@mui/material";
 import { TaskCard } from "atoms";
-import { Meta, PageHead } from "components";
+import { Filters, Meta, PageHead } from "components";
 import { constantsData, statusOptionsData, urlsData } from "data";
 import { useTasksList } from "hooks";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { clearFilters, closeFilters } from "redux/actions";
 
 const TasksListView = () => {
+    const dispatch = useDispatch();
+
     const { tasks } = useSelector((state) => state.tasksReducer);
+
+    const filtersOpened = useSelector((state) => state.filtersReducer.open);
 
     const {
         create: createTaskRouteUrl,
@@ -19,6 +25,15 @@ const TasksListView = () => {
 
     const { loading } = useTasksList();
 
+    useEffect(
+        () => {
+            dispatch(clearFilters());
+
+            dispatch(closeFilters());
+        },
+        [], //eslint-disable-line
+    );
+
     if (loading) return <span>Loading...</span>;
 
     return (
@@ -30,6 +45,7 @@ const TasksListView = () => {
                 hasAdd
                 hasFilters
             />
+            {filtersOpened && <Filters module="tasks" />}
             <Box className="tasks">
                 <Grid
                     spacing={2}

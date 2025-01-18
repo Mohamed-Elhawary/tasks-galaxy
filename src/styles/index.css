@@ -32,11 +32,15 @@ a {
 
 .tasks::-webkit-scrollbar-thumb {
     background-color: #41b7ff;
-    border-radius: 10px;
+    border-radius: 15px!important;
 }
 
 .tasks::-webkit-scrollbar-thumb:hover {
     background-color: #41b7ff;
+}
+
+::-webkit-scrollbar-button {
+    display: none!important; /* Hides the top and bottom arrows */
 }
 
 .tasks {

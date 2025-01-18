@@ -8,17 +8,24 @@ import { updateStateHandler } from "utils";
 
 const initialState = {
     filters: {},
+    module: null,
     open: false,
 };
 
-const openFilters = (state) => updateStateHandler(
+const openFilters = (state, module) => updateStateHandler(
     state,
-    { open: true },
+    {
+        module,
+        open: true,
+    },
 );
 
 const closeFilters = (state) => updateStateHandler(
     state,
-    { open: false },
+    {
+        module: null,
+        open: false,
+    },
 );
 
 const setFilters = (state, filters) => updateStateHandler(
@@ -37,10 +44,16 @@ const filtersReducer = (state = initialState, action) => {
         type,
     } = action;
 
-    const { filters } = payload || {};
+    const {
+        filters,
+        module,
+    } = payload || {};
 
     switch (type) {
-    case OPEN_FILTERS: return openFilters(state);
+    case OPEN_FILTERS: return openFilters(
+        state,
+        module,
+    );
     case CLOSE_FILTERS: return closeFilters(state);
     case SET_FILTERS: return setFilters(
         state,

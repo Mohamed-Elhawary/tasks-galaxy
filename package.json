@@ -1,0 +1,90 @@
+{
+	"name": "tasks-galaxy",
+	"private": true,
+	"author": "Mohamed Elhawary",
+	"engines": {
+		"node": "20"
+	},
+	"scripts": {
+		"dev": "react-scripts start",
+		"build": "react-scripts build",
+		"start": "serve -s build",
+		"test": "react-scripts test",
+		"test:coverage": "react-scripts test --coverage --watchAll",
+		"lint": "eslint --fix --ext .js,.jsx .",
+		"eject": "react-scripts eject"
+	},
+	"dependencies": {
+		"@emotion/cache": "11.11.0",
+		"@emotion/react": "11.11.1",
+		"@emotion/styled": "11.11.0",
+		"@hookform/resolvers": "2.9.10",
+		"@loadable/component": "5.15.3",
+		"@mui/icons-material": "5.14.16",
+		"@mui/lab": "5.0.0-alpha.111",
+		"@mui/material": "5.14.17",
+		"@mui/styled-engine-sc": "5.10.16",
+		"@mui/styles": "5.10.16",
+		"@mui/x-date-pickers": "5.0.10",
+		"@testing-library/react": "14.1.0",
+		"@testing-library/user-event": "14.5.1",
+		"ajv": "^8.17.1",
+		"ajv-keywords": "^5.1.0",
+		"axios": "1.6.1",
+		"date-fns": "2.30.0",
+		"dotenv": "16.3.1",
+		"history": "5.3.0",
+		"prop-types": "15.8.1",
+		"react": "18.2.0",
+		"react-dom": "18.2.0",
+		"react-helmet": "6.1.0",
+		"react-hook-form": "7.40.0",
+		"react-redux": "8.1.1",
+		"react-router-dom": "6.18.0",
+		"react-scripts": "5.0.1",
+		"react-test-renderer": "18.2.0",
+		"react-toastify": "9.1.3",
+		"redux": "4.2.1",
+		"redux-devtools-extension": "2.13.9",
+		"redux-persist": "6.0.0",
+		"redux-thunk": "2.4.2",
+		"styled-components": "5.3.11",
+		"stylis": "4.3.0",
+		"yup": "1.3.2"
+	},
+	"jest": {
+		"moduleNameMapper": {
+			"axios": "axios/dist/node/axios.cjs"
+		}
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "6.1.4",
+		"@testing-library/react": "14.1.0",
+		"@testing-library/user-event": "14.5.1",
+		"@types/react": "18.2.37",
+		"@types/react-dom": "18.2.15",
+		"eslint": "8.53.0",
+		"eslint-config-airbnb": "^19.0.4",
+		"eslint-plugin-destructuring-newline": "0.0.2",
+		"eslint-plugin-import": "2.29.0",
+		"eslint-plugin-jsx-a11y": "6.8.0",
+		"eslint-plugin-react": "7.33.2",
+		"eslint-plugin-react-hooks": "4.6.0",
+		"eslint-plugin-simple-import-sort": "10.0.0",
+		"eslint-plugin-sort-destructure-keys": "1.5.0",
+		"eslint-plugin-sort-keys-fix": "1.1.2",
+		"jest": "29.7.0"
+	}
+}

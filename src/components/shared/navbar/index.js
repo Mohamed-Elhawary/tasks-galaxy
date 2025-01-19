@@ -12,7 +12,9 @@ import {
 import { constantsData, urlsData } from "data";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import {
+    Link, useLocation, useNavigate, useSearchParams,
+} from "react-router-dom";
 import { setSearchValue, switchTheme } from "redux/actions";
 import { StyledSearchInput } from "styles";
 import { debounce } from "utils";
@@ -85,22 +87,25 @@ const Navbar = () => {
                 <Box
                     sx={{
                         alignItems: "center",
-                        cursor: "pointer",
                         display: "flex",
                         flexGrow: 1,
                         gap: 2,
                     }}
-                    onClick={() => navigate(homeRouteUrl)}
                 >
-                    <img
-                        alt="logo"
-                        src="/logo.png"
-                        style={{
-                            borderRadius: 5,
-                            height: 100,
-                            width: 100,
-                        }}
-                    />
+                    <Link
+                        style={{ textDecoration: "none" }}
+                        to={homeRouteUrl}
+                    >
+                        <img
+                            alt="logo"
+                            src="/logo.png"
+                            style={{
+                                borderRadius: 5,
+                                height: 100,
+                                width: 100,
+                            }}
+                        />
+                    </Link>
                     <Typography
                         color="secondary"
                         variant="h3"

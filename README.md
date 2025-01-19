@@ -2,6 +2,14 @@
 
 Tasks Galaxy is a smart task management dashboard App that allows you to organize and add your daily tasks including other features, like drag &amp; drop and changing task status from to-do status to in-progress, pending, or done status. It depends on the mock API of JSON Placeholder website for data persistence.
 
+You can view the App from [here](https://tasks-galaxy.netlify.app/)
+
+![Screenshot](preview.png) 
+
+## Demo
+
+https://github.com/user-attachments/assets/27d3fe43-ab45-48de-8552-5da67fec0d2c
+
 ## Requirements
 
 > Runtime Server Environment:

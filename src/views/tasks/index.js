@@ -177,7 +177,7 @@ const TasksListView = () => {
                                                 flexDirection="column"
                                                 gap={2}
                                             >
-                                                {tasks[column].map((task, index) => (
+                                                {tasks?.[column]?.map((task, index) => (
                                                     <Draggable
                                                         draggableId={task.id}
                                                         index={index}

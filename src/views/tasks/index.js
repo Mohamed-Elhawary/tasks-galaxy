@@ -4,7 +4,7 @@ import { Filters, Meta, PageHead } from "components";
 import { constantsData, statusOptionsData, urlsData } from "data";
 import { useDeleteTask, useTasksList } from "hooks";
 import { useEffect, useState } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd"; // eslint-disable-line
 import { useDispatch, useSelector } from "react-redux";
 import { clearFiltersAction, closeFiltersAction, setTasksListAction } from "redux/actions";
 import { theme } from "theme";

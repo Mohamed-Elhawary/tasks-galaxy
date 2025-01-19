@@ -1,10 +1,14 @@
 import { Box, CssBaseline } from "@mui/material";
-import { Content } from "components";
+import { Content, Navbar } from "components";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => (
-    <Box display="flex">
+    <Box
+        display="flex"
+        flexDirection="column"
+    >
         <CssBaseline />
+        <Navbar />
         <Content maxWidth={false}>
             <Outlet />
         </Content>

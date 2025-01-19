@@ -59,3 +59,19 @@ export const generateRandomIDHandler = () => Math.random().toString(36).substrin
     2,
     10,
 );
+
+export const debounce = (callback, time) => {
+    let timeout = null;
+
+    return (value, ...rest) => {
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(
+            () => callback(
+                value,
+                ...rest,
+            ),
+            time,
+        );
+    };
+};

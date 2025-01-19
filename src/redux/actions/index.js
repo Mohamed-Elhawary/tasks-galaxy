@@ -5,6 +5,7 @@ import {
     openFiltersAction,
     setFiltersAction,
 } from "./filters";
+import { setSearchValue } from "./search";
 import {
     createTaskAction,
     deleteTaskAction,
@@ -22,5 +23,6 @@ export {
     openAlertAction,
     openFiltersAction,
     setFiltersAction,
+    setSearchValue,
     setTasksListAction,
 };

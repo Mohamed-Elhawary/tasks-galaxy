@@ -5,6 +5,7 @@ import Details from "./shared/details";
 import Filters from "./shared/filters";
 import FormContainer from "./shared/form-container";
 import Meta from "./shared/meta";
+import Navbar from "./shared/navbar";
 import PageHead from "./shared/page-head";
 
 export {
@@ -14,6 +15,7 @@ export {
     Filters,
     FormContainer,
     Meta,
+    Navbar,
     PageHead,
     TaskForm,
 };

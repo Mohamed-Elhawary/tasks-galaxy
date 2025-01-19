@@ -3,6 +3,7 @@ import StyledContent from "./content";
 import StyledDetails from "./details";
 import StyledFormContainer from "./form-container";
 import { StyledPageHead, StyledPageHeadTitle } from "./page-head";
+import StyledSearchInput from "./search-input";
 import StyledTextField from "./text-field";
 
 export {
@@ -12,5 +13,6 @@ export {
     StyledFormContainer,
     StyledPageHead,
     StyledPageHeadTitle,
+    StyledSearchInput,
     StyledTextField,
 };

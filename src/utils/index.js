@@ -1,6 +1,7 @@
 import axios from "./axios";
 import NetworkErrorBoundary from "./network-error-boundary";
 import {
+    debounce,
     generateFutureDateHandler,
     generateRandomIDHandler,
     generateRandomItemHandler,
@@ -10,6 +11,7 @@ import {
 
 export {
     axios,
+    debounce,
     generateFutureDateHandler,
     generateRandomIDHandler,
     generateRandomItemHandler,

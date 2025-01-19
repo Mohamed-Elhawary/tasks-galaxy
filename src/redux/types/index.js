@@ -5,6 +5,7 @@ import {
     OPEN_FILTERS,
     SET_FILTERS,
 } from "./filters";
+import { SET_SEARCH_VALUE } from "./search";
 import {
     CREATE_TASK,
     DELETE_TASK,
@@ -22,5 +23,6 @@ export {
     OPEN_ALERT,
     OPEN_FILTERS,
     SET_FILTERS,
+    SET_SEARCH_VALUE,
     SET_TASKS_LIST,
 };

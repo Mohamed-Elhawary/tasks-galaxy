@@ -50,6 +50,13 @@ const TasksListView = () => {
         [], //eslint-disable-line
     );
 
+    useEffect(
+        () => () => {
+            if (JSON.parse(localStorage.getItem("tasks"))) dispatch(setTasksListAction(JSON.parse(localStorage.getItem("tasks")), true)); // eslint-disable-line
+        },
+        [], //eslint-disable-line
+    );
+
     return (
         <>
             <Meta title={tasksListTitleConstant} />
@@ -75,13 +82,14 @@ const TasksListView = () => {
                 }}
             />
             {loading || deleteLoading ? <Loader /> : (
-                <Box className="tasks">
+                <Box>
                     <Grid
                         spacing={2}
                         container
                     >
                         {statusOptionsData.map((column) => (
                             <Grid
+                                className="tasks"
                                 key={column}
                                 lg={3}
                                 md={6}

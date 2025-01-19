@@ -119,26 +119,34 @@ const editTask = (state, task) => {
 const deleteTask = (state, id) => {
     const { tasks } = state;
 
-    for (const [status, taskList] of Object.entries(tasks)) { // eslint-disable-line
-        const taskIndex = taskList.findIndex((task) => task.id === id);
+    const localStorageTasks = JSON.parse(localStorage.getItem("tasks")); // eslint-disable-line
 
-        if (taskIndex !== -1) {
-            taskList.splice(
-                taskIndex,
-                1,
-            );
+    const filteredTasks = (selectedTasks) => {
+        for (const [status, taskList] of Object.entries(selectedTasks)) { // eslint-disable-line
+            const taskIndex = taskList.findIndex((task) => task.id === id);
 
-            localStorage.setItem( // eslint-disable-line
-                "tasks",
-                JSON.stringify(tasks),
-            );
-
-            return updateStateHandler(
-                state,
-                { tasks },
-            );
+            if (taskIndex !== -1) {
+                taskList.splice(
+                    taskIndex,
+                    1,
+                );
+            }
         }
-    }
+    };
+
+    filteredTasks(tasks);
+
+    filteredTasks(localStorageTasks);
+
+    localStorage.setItem( // eslint-disable-line
+        "tasks",
+        JSON.stringify(localStorageTasks),
+    );
+
+    return updateStateHandler(
+        state,
+        { tasks },
+    );
 };
 const tasksReducer = (state = initialState, action) => {
     const {

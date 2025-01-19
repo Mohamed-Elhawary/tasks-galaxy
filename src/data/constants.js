@@ -48,6 +48,7 @@ const constantsData = {
         description: "Description",
         dueDate: "Due Date",
         priority: "Priority",
+        searchTasks: "Search Tasks",
         status: "Status",
         updatedAt: "Updated At",
     },

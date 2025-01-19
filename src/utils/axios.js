@@ -11,7 +11,7 @@ const axios = (params, isFormData) => axiosBase.create({
 
 axios.interceptors?.request?.use(
     (config) => {
-        console.log(
+        console.log( // eslint-disable-line
             "Request:",
             config,
         );
@@ -19,7 +19,7 @@ axios.interceptors?.request?.use(
         return config;
     },
     (error) => {
-        console.error(
+        console.error( // eslint-disable-line
             "Request Error:",
             error,
         );
@@ -30,7 +30,7 @@ axios.interceptors?.request?.use(
 
 axios.interceptors?.response?.use(
     (response) => {
-        console.log(
+        console.log( // eslint-disable-line
             "Response:",
             response,
         );
@@ -38,7 +38,7 @@ axios.interceptors?.response?.use(
         return response;
     },
     (error) => {
-        if (error.response?.status === 401) console.error("Unauthorized, redirecting...");
+        if (error.response?.status === 401) console.error("Unauthorized, redirecting..."); // eslint-disable-line
 
         return Promise.reject(error);
     },

@@ -83,8 +83,11 @@ const constantsData = {
         medium: "Medium",
     },
     titles: {
+        allRightsReserved: "All Rights Reserved",
+        author: "Mohamed Elhawary",
         createTask: "Create Task",
         editTask: "Edit Task",
+        madeBy: "Made By",
         notFound: "Not found",
         tasksGalaxy: "Tasks Galaxy",
         tasksList: "Tasks List",

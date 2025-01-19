@@ -1,5 +1,5 @@
 import { Box, CssBaseline } from "@mui/material";
-import { Content, Navbar } from "components";
+import { Content, Footer, Navbar } from "components";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => (
@@ -12,6 +12,7 @@ const MainLayout = () => (
         <Content maxWidth={false}>
             <Outlet />
         </Content>
+        <Footer />
     </Box>
 );
 

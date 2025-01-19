@@ -1,25 +1,28 @@
-import { Brightness4, Search } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
+import NightlightIcon from "@mui/icons-material/Nightlight";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import {
     Box,
     IconButton,
     InputBase,
     Toolbar,
+    Tooltip,
     Typography,
 } from "@mui/material";
 import { constantsData, urlsData } from "data";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { setSearchValue } from "redux/actions";
+import { setSearchValue, switchTheme } from "redux/actions";
 import { StyledSearchInput } from "styles";
 import { debounce } from "utils";
 
 const Navbar = () => {
-    const [darkMode, setDarkMode] = useState(false);
-
     const dispatch = useDispatch();
 
     const { value } = useSelector((state) => state.searchReducer);
+
+    const themeMode = useSelector((state) => state.themeReducer.theme);
 
     const navigate = useNavigate();
 
@@ -33,7 +36,9 @@ const Navbar = () => {
     } = urlsData.routes;
 
     const toggleDarkModeHandler = () => {
-        setDarkMode(!darkMode);
+        dispatch(switchTheme());
+
+        localStorage.setItem("theme", themeMode === "dark" ? "light" : "dark"); // eslint-disable-line
     };
 
     const changeSearchFieldValueHandler = useCallback(
@@ -48,7 +53,11 @@ const Navbar = () => {
     ); /* eslint react-hooks/exhaustive-deps: "off" */
 
     const {
-        labels: { searchTasks: searchTasksLabelConstant },
+        labels: {
+            darkMode: darkModeLabelConstant,
+            lightMode: lightModeLabelConstant,
+            searchTasks: searchTasksLabelConstant,
+        },
         titles: { tasksGalaxy: tasksGalaxyTitleConstant },
     } = constantsData;
 
@@ -61,7 +70,7 @@ const Navbar = () => {
 
     return (
         <Box
-            color={darkMode ? "default" : "primary"}
+            color="primary"
             mt={4}
             position="static"
         >
@@ -76,6 +85,7 @@ const Navbar = () => {
                 <Box
                     sx={{
                         alignItems: "center",
+                        cursor: "pointer",
                         display: "flex",
                         flexGrow: 1,
                         gap: 2,
@@ -121,9 +131,11 @@ const Navbar = () => {
                             <Search />
                         </IconButton>
                     </StyledSearchInput>
-                    <IconButton onClick={toggleDarkModeHandler}>
-                        <Brightness4 />
-                    </IconButton>
+                    <Tooltip title={themeMode === "dark" ? lightModeLabelConstant : darkModeLabelConstant}>
+                        <IconButton onClick={toggleDarkModeHandler}>
+                            {themeMode === "dark" ? <WbSunnyIcon /> : <NightlightIcon />}
+                        </IconButton>
+                    </Tooltip>
                 </Box>
             </Toolbar>
         </Box>

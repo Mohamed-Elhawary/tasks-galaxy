@@ -12,6 +12,7 @@ import {
     editTaskAction,
     setTasksListAction,
 } from "./tasks";
+import switchTheme from "./theme";
 
 export {
     clearFiltersAction,
@@ -25,4 +26,5 @@ export {
     setFiltersAction,
     setSearchValue,
     setTasksListAction,
+    switchTheme,
 };

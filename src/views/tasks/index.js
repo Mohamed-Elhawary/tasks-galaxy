@@ -5,7 +5,8 @@ import { constantsData, statusOptionsData, urlsData } from "data";
 import { useDeleteTask, useTasksList } from "hooks";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearFiltersAction, closeFiltersAction } from "redux/actions";
+import { clearFiltersAction, closeFiltersAction, setTasksListAction } from "redux/actions";
+import { theme } from "theme";
 
 const TasksListView = () => {
     const [open, setOpen] = useState({
@@ -16,6 +17,8 @@ const TasksListView = () => {
     const dispatch = useDispatch();
 
     const { tasks } = useSelector((state) => state.tasksReducer);
+
+    const themeMode = useSelector((state) => state.themeReducer.theme);
 
     const filtersOpened = useSelector((state) => state.filtersReducer.open);
 
@@ -102,7 +105,7 @@ const TasksListView = () => {
                             >
                                 <Box
                                     sx={{
-                                        backgroundColor: "#f4f4f4",
+                                        backgroundColor: themeMode === "dark" ? theme.palette.grey[600] : "#f4f4f4",
                                         borderRadius: 5,
                                         boxShadow: 1,
                                         marginBottom: {

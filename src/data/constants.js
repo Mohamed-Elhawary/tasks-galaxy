@@ -45,8 +45,10 @@ const constantsData = {
     },
     labels: {
         createdAt: "Created At",
+        darkMode: "Dark Mode",
         description: "Description",
         dueDate: "Due Date",
+        lightMode: "Light Mode",
         priority: "Priority",
         searchTasks: "Search Tasks",
         status: "Status",

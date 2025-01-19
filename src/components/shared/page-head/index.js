@@ -29,6 +29,8 @@ const PageHead = ({
 
     const filters = useSelector((state) => state.filtersReducer?.filters);
 
+    const themeMode = useSelector((state) => state.themeReducer.theme);
+
     const dispatch = useDispatch();
 
     const {
@@ -50,7 +52,7 @@ const PageHead = ({
                             <IconButton>
                                 <ArrowBackOutlinedIcon
                                     sx={{
-                                        color: theme.palette.grey[700],
+                                        color: themeMode === "dark" ? theme.palette.grey[100] : theme.palette.grey[700],
                                         fontSize: 25,
                                     }}
                                 />

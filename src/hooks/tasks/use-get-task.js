@@ -67,10 +67,12 @@ const useGetTask = (id) => {
                         task: {},
                     });
 
-                    dispatch(openAlertAction(
-                        err?.response?.data?.message,
-                        "error",
-                    ));
+                    if (err?.response?.data?.message) {
+                        dispatch(openAlertAction(
+                            err?.response?.data?.message,
+                            "error",
+                        ));
+                    }
                 }
             })["finally"](() => {
                 setLoading(false);

@@ -12,6 +12,7 @@ import {
     EDIT_TASK,
     SET_TASKS_LIST,
 } from "./tasks";
+import SWITCH_THEME from "./theme";
 
 export {
     CLEAR_FILTERS,
@@ -25,4 +26,5 @@ export {
     SET_FILTERS,
     SET_SEARCH_VALUE,
     SET_TASKS_LIST,
+    SWITCH_THEME,
 };

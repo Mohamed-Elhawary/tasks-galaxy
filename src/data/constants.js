@@ -13,6 +13,7 @@ const constantsData = {
         save: "Save",
         view: "View",
     },
+    hostUrl: "https://tasks-galaxy.netlify.app",
     inputs: {
         description: {
             label: "Description",

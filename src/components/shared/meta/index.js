@@ -34,6 +34,14 @@ const Meta = ({ title }) => {
                 content={metaDescriptionConstant}
                 property="og:description"
             />
+            <meta
+                content={`${constantsData.hostUrl}/logo.png`} // eslint-disable-line
+                property="og:image"
+            />
+            <meta
+                content={constantsData.hostUrl + location.pathname + location.search} // eslint-disable-line
+                property="og:url"
+            />
         </Helmet>
     );
 };

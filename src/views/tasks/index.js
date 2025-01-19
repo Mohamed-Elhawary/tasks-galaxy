@@ -4,6 +4,7 @@ import { Filters, Meta, PageHead } from "components";
 import { constantsData, statusOptionsData, urlsData } from "data";
 import { useDeleteTask, useTasksList } from "hooks";
 import { useEffect, useState } from "react";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { clearFiltersAction, closeFiltersAction, setTasksListAction } from "redux/actions";
 import { theme } from "theme";
@@ -43,6 +44,51 @@ const TasksListView = () => {
         deleteTask,
         loading: deleteLoading,
     } = useDeleteTask();
+
+    const handleDragEnd = (result) => {
+        const tasksData = { ...tasks };
+
+        const {
+            destination,
+            source,
+        } = result;
+
+        if (!destination) return;
+
+        const sourceColumn = source.droppableId;
+
+        const destinationColumn = destination.droppableId;
+
+        const sourceTasks = [...tasksData[sourceColumn]];
+
+        const [movedTask] = sourceTasks.splice(
+            source.index,
+            1,
+        );
+
+        const destinationTasks = [...tasksData[destinationColumn]];
+        destinationTasks.splice(
+            destination.index,
+            0,
+            movedTask,
+        );
+
+        const draggedTasks = {
+            ...tasksData,
+            [destinationColumn]: destinationTasks,
+            [sourceColumn]: sourceTasks,
+        };
+
+        dispatch(setTasksListAction(
+            draggedTasks,
+            true,
+        ));
+
+        localStorage.setItem( // eslint-disable-line
+            "tasks",
+            JSON.stringify(draggedTasks),
+        );
+    };
 
     useEffect(
         () => {
@@ -85,7 +131,7 @@ const TasksListView = () => {
                 }}
             />
             {loading || deleteLoading ? <Loader /> : (
-                <Box>
+                <DragDropContext onDragEnd={handleDragEnd}>
                     <Grid
                         spacing={2}
                         container
@@ -103,54 +149,68 @@ const TasksListView = () => {
                                 }}
                                 item
                             >
-                                <Box
-                                    sx={{
-                                        backgroundColor: themeMode === "dark" ? theme.palette.grey[600] : "#f4f4f4",
-                                        borderRadius: 5,
-                                        boxShadow: 1,
-                                        marginBottom: {
-                                            xl: 1,
-                                            xs: 4,
-                                        },
-                                        minHeight: 400,
-                                        padding: 2,
-                                    }}
-                                >
-                                    <Typography
-                                        sx={{ marginBottom: 2 }}
-                                        variant="h5"
-                                    >
-                                        {column}
-                                    </Typography>
-                                    <Box
-                                        display="flex"
-                                        flexDirection="column"
-                                        gap={2}
-                                    >
-                                        {tasks?.[column]?.length > 0 ? tasks?.[column]?.map(({
-                                            description,
-                                            dueDate,
-                                            id,
-                                            priority,
-                                            title,
-                                        }) => (
-                                            <TaskCard
-                                                description={description}
-                                                dueDate={dueDate}
-                                                id={id}
-                                                key={id}
-                                                link={`${tasksRouteUrl}/${id}`}
-                                                priority={priority}
-                                                setDialogOpen={setOpen}
-                                                title={title}
-                                            />
-                                        )) : null}
-                                    </Box>
-                                </Box>
+                                <Droppable droppableId={column}>
+                                    {(provided) => (
+                                        <Box
+                                            ref={provided.innerRef}
+                                            {...provided.droppableProps}
+                                            sx={{
+                                                backgroundColor: themeMode === "dark" ? theme.palette.grey[600] : "#f4f4f4",
+                                                borderRadius: 5,
+                                                boxShadow: 1,
+                                                marginBottom: {
+                                                    xl: 1,
+                                                    xs: 4,
+                                                },
+                                                minHeight: 400,
+                                                padding: 2,
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{ marginBottom: 2 }}
+                                                variant="h5"
+                                            >
+                                                {column}
+                                            </Typography>
+                                            <Box
+                                                display="flex"
+                                                flexDirection="column"
+                                                gap={2}
+                                            >
+                                                {tasks[column].map((task, index) => (
+                                                    <Draggable
+                                                        draggableId={task.id}
+                                                        index={index}
+                                                        key={task.id}
+                                                    >
+                                                        {(provided) => ( // eslint-disable-line
+                                                            <Box
+                                                                ref={provided.innerRef}
+                                                                {...provided.draggableProps}
+                                                                {...provided.dragHandleProps}
+                                                            >
+                                                                <TaskCard
+                                                                    description={task.description}
+                                                                    dueDate={task.dueDate}
+                                                                    id={task.id}
+                                                                    link={`${tasksRouteUrl}/${task.id}`}
+                                                                    priority={task.priority}
+                                                                    setDialogOpen={setOpen}
+                                                                    title={task.title}
+                                                                />
+                                                            </Box>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+                                                {provided.placeholder}
+                                            </Box>
+                                        </Box>
+                                    )}
+                                </Droppable>
                             </Grid>
                         ))}
                     </Grid>
-                </Box>
+                </DragDropContext>
             )}
         </>
     );

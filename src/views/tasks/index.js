@@ -145,7 +145,7 @@ const TasksListView = () => {
                                 sx={{
                                     marginBottom: {
                                         xl: 1,
-                                        xs: 4,
+                                        xs: 10,
                                     },
                                     maxHeight: "1200px",
                                 }}

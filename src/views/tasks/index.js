@@ -138,14 +138,16 @@ const TasksListView = () => {
                     >
                         {statusOptionsData.map((column) => (
                             <Grid
-                                className="tasks"
                                 key={column}
                                 lg={3}
                                 md={6}
                                 xs={12}
                                 sx={{
+                                    marginBottom: {
+                                        xl: 1,
+                                        xs: 4,
+                                    },
                                     maxHeight: "1200px",
-                                    overflowY: "auto",
                                 }}
                                 item
                             >
@@ -158,12 +160,11 @@ const TasksListView = () => {
                                                 backgroundColor: themeMode === "dark" ? theme.palette.grey[600] : "#f4f4f4",
                                                 borderRadius: 5,
                                                 boxShadow: 1,
-                                                marginBottom: {
-                                                    xl: 1,
-                                                    xs: 4,
-                                                },
-                                                minHeight: 400,
+                                                maxHeight: "1250px",
+                                                minHeight: 350,
+                                                overflowY: "hidden",
                                                 padding: 2,
+                                                paddingBottom: 2,
                                             }}
                                         >
                                             <Typography
@@ -173,9 +174,14 @@ const TasksListView = () => {
                                                 {column}
                                             </Typography>
                                             <Box
+                                                className="tasks"
                                                 display="flex"
                                                 flexDirection="column"
                                                 gap={2}
+                                                sx={{
+                                                    maxHeight: "1150px",
+                                                    overflowY: "auto",
+                                                }}
                                             >
                                                 {tasks?.[column]?.map((task, index) => (
                                                     <Draggable
